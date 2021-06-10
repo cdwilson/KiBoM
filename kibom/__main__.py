@@ -108,7 +108,8 @@ def writeVariant(input_file, output_dir, output_file, variant, preferences):
     # Read out all available fields
     for g in groups:
         for f in g.fields:
-            columns.AddColumn(f)
+            if preferences.complexVariant and (VARIANT_FIELD_SEPARATOR not in f):
+                columns.AddColumn(f)
 
     # Don't add 'boards' column if only one board is specified
     if preferences.boards <= 1:
